@@ -33,6 +33,6 @@ public class Post extends BaseEntity {
     @JoinColumn (name="user_id")
     private User seller;
 
-    @OneToOne (mappedBy="posts", fetch = FetchType.EAGER)
+    @OneToOne (mappedBy="post", fetch = FetchType.EAGER)
     private Sale sale;
 }

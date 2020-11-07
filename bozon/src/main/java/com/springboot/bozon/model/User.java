@@ -34,9 +34,9 @@ public class User extends BaseEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER)
     private List<Post> posts;
 
-    @OneToOne(mappedBy = "users", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "buyer", fetch = FetchType.EAGER)
     private Sale sale;
 }

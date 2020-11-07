@@ -212,8 +212,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="users"/>
     </changeSet>
-
-
     <changeSet id="1.0.10" author="mialyshev">
         <insert tableName="roles">
             <column name="name" value="ROLE_USER"/>
