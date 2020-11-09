@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome</title>
+</head>
+<body>
+    <span sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}">Login</a>
+        <a th:href="@{/registration}">Registration</a>
+    </span>
+    <span sec:authorize="isAuthenticated()">
+        Welcome, <span sec:authentication="name">Username</span>
+        <a th:href="@{/logout}">Logout</a></h4>
+    </span>
+</body>
+</html>
