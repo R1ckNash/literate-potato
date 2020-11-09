@@ -8,12 +8,13 @@
 </head>
 <body>
     <span sec:authorize="!isAuthenticated()">
-        <a th:href="@{/login}">Login</a>
-        <a th:href="@{/registration}">Registration</a>
+        <p><a th:href="@{/login}">Login</a></p>
+        <p><a th:href="@{/registration}">Registration</a></p>
     </span>
     <span sec:authorize="isAuthenticated()">
-        Welcome, <span sec:authentication="name">Username</span>
-        <a th:href="@{/logout}">Logout</a></h4>
+        <h1>Welcome, <span sec:authentication="name">Username</span></h1>
+        <p><a th:href="@{/logout}">Logout</a></p>
+        <p><a th:href="@{/post}">All posts</a></p>
     </span>
 </body>
 </html>

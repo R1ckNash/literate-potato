@@ -10,26 +10,19 @@
         Invalid username and password.
     </div>
     <form th:method="POST" th:action="@{/login}">
-        <label for="username">Username</label>:
-        <input type="text"
-               id="username"
-               name="username"
-               class="form-control"
-               autofocus="autofocus"
-               placeholder="Username">
-
-        <label for="password">Password</label>:
-        <input type="password"
-               id="password"
-               name="password"
-               class="form-control"
-               placeholder="Password">
-
-        <input type="submit"
-               name="login-submit"
-               id="login-submit"
-               class="form-control btn btn-info"
-               value="Log In">
+        <table>
+            <tr>
+                <td>User:</td>
+                <td><input type='text' name='username' value=''></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type='password' name='password' /></td>
+            </tr>
+            <tr>
+                <td><input name="submit" type="submit" value="Submit" /></td>
+            </tr>
+        </table>
     </form>
 
 </div>

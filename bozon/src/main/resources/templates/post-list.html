@@ -6,6 +6,7 @@
     <title>Bozon</title>
 </head>
 <body>
+    <p th:text="'Your id is : ' + ${currentUser.getId()}">id</a></p>
 <div th:switch="${posts}">
     <h2 th:case="null">No posts found!</h2>
     <div th:case="*">

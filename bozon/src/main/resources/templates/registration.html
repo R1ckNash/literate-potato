@@ -8,53 +8,58 @@
 
     <form th:method="POST" th:action="@{/registration}" th:object="${userForm}">
         <h2>Регистрация</h2>
-        <label for="username">Enter username: </label>
-        <input type="text" th:field="*{username}" id="username"/>
-        <div th:if="${usernameError}">
-            <div style="color: red" th:text="${usernameError}"></div>
-        </div>
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" th:field="*{username}"/></td>
+                <div th:if="${usernameError}">
+                    <div style="color: red" th:text="${usernameError}"></div>
+                </div>
+            </tr>
 
-        <br/>
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" th:field="*{firstName}"/></td>
+            </tr>
 
-        <label for="firstName">Enter firstName: </label>
-        <input type="text" th:field="*{firstName}" id="firstName"/>
+            <tr>
+                <td>Last Name:</td>
+                <td><input type="text" th:field="*{lastName}"/></td>
+            </tr>
 
-        <br/>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" th:field="*{email}"/></td>
+                <div th:if="${emailError}">
+                    <div style="color: red" th:text="${emailError}"></div>
+                </div>
+            </tr>
 
-        <label for="lastName">Enter lastName: </label>
-        <input type="text" th:field="*{lastName}" id="lastName"/>
+            <tr>
+                <td>Password:</td>
+                <td><input type="text" th:field="*{password}"/></td>
+            </tr>
 
-        <br/>
+            <tr>
+                <td>Confirm Password:</td>
+                <td><input type="text" th:field="*{confirmPassword}"/></td>
+                <div th:if="${passwordError}">
+                    <div style="color: red" th:text="${passwordError}"></div>
+                </div>
+            </tr>
 
-        <label for="email">Enter email: </label>
-        <input type="text" th:field="*{email}" id="email"/>
-        <div th:if="${emailError}">
-            <div style="color: red" th:text="${emailError}"></div>
-        </div>
+            <tr>
+                <td>Phone Number:</td>
+                <td><input type="text" th:field="*{phoneNumber}"/></td>
+                <div th:if="${phoneError}">
+                    <div style="color: red" th:text="${phoneError}"></div>
+                </div>
+            </tr>
 
-        <br/>
-
-        <label for="password">Enter password: </label>
-        <input type="text" th:field="*{password}" id="password"/>
-
-        <br/>
-
-        <label for="confirmPassword">Confirm Password: </label>
-        <input type="text" th:field="*{confirmPassword}" id="confirmPassword"/>
-
-        <div th:if="${passwordError}">
-            <div style="color: red" th:text="${passwordError}"></div>
-        </div>
-
-        <br/>
-
-        <label for="phoneNumber">Enter phoneNumber: </label>
-        <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
-        <div th:if="${phoneError}">
-            <div style="color: red" th:text="${phoneError}"></div>
-        </div>
-
-        <input type="submit" value="Register!"/>
+            <tr>
+                <td><input name="submit" type="submit" value="Register!" /></td>
+            </tr>
+        </table>
     </form>
 </body>
 </html>
