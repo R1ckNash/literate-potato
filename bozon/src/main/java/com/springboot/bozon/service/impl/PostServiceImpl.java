@@ -2,9 +2,12 @@ package com.springboot.bozon.service.impl;
 
 import com.springboot.bozon.model.Post;
 import com.springboot.bozon.model.Status;
+import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.PostRepository;
+import com.springboot.bozon.repository.UserRepository;
 import com.springboot.bozon.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +17,14 @@ import java.util.List;
  */
 @Service
 public class PostServiceImpl implements PostService {
+
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, UserRepository userRepository) {
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
     }
 
     public Post findById(Long id) {
@@ -29,11 +35,9 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAll();
     }
 
-    public boolean save(Post post) {
-        Post postDromDB = postRepository.findByName(post.getName());
-        if(postDromDB != null){
-            return false;
-        }
+    public boolean save(Post post, String username) {
+        User user = userRepository.findByUsername(username);
+        post.setSeller(user);
         post.setStatus(Status.ACTIVE);
         postRepository.save(post);
         return true;

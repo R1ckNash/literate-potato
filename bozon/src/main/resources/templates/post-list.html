@@ -31,7 +31,6 @@
                 <td th:text="${post.price}"></td>
                 <td th:text="${post.name}"></td>
                 <td th:text="${post.description}"></td>
-                <td th:text="${post.created}"></td>
                 <td th:text="${post.status}"></td>
                 <td><a th:href="@{post-list}">Detail</a></td>
                 <td><a th:href="@{post-list}">Buy</a></td>
@@ -40,6 +39,7 @@
         </table>
     </div>
     <p><a href="/">Home</a></p>
+    <p><a href="/create_post">Create post</a></p>
 </div>
 </body>
 </html>
