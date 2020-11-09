@@ -1,6 +1,6 @@
 package com.springboot.bozon.config;
 
-import com.springboot.bozon.service.UserDetailsServiceImpl;
+import com.springboot.bozon.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.dao.*;
 import org.springframework.security.config.annotation.authentication.builders.*;
@@ -49,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/registration").not().fullyAuthenticated()
                     .antMatchers("/").permitAll()
+                    .antMatchers("/create_category").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                     .and()
                 .formLogin()

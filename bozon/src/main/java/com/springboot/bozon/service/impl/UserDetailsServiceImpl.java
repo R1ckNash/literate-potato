@@ -1,4 +1,4 @@
-package com.springboot.bozon.service;
+package com.springboot.bozon.service.impl;
 
 import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.UserRepository;

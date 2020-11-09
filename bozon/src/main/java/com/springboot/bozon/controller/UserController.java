@@ -1,8 +1,8 @@
 package com.springboot.bozon.controller;
 
 import com.springboot.bozon.model.User;
-import com.springboot.bozon.service.UserDetailsServiceImpl;
-import com.springboot.bozon.service.UserServiceImpl;
+import com.springboot.bozon.service.impl.UserDetailsServiceImpl;
+import com.springboot.bozon.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

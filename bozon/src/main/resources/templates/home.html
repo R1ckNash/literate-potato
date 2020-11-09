@@ -14,7 +14,8 @@
     <span sec:authorize="isAuthenticated()">
         <h1>Welcome, <span sec:authentication="name">Username</span></h1>
         <p><a th:href="@{/logout}">Logout</a></p>
-        <p><a th:href="@{/post}">All posts</a></p>
+        <p><a th:href="@{/posts}">All posts</a></p>
+        <p><a th:href="@{/categories}">All categories</a></p>
     </span>
 </body>
 </html>

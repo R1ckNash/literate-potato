@@ -1,9 +1,10 @@
-package com.springboot.bozon.service;
+package com.springboot.bozon.service.impl;
 
 import com.springboot.bozon.model.Status;
 import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.RoleRepository;
 import com.springboot.bozon.repository.UserRepository;
+import com.springboot.bozon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
