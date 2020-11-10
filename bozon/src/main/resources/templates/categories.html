@@ -5,30 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<div th:switch="${categories}">
-    <h2 th:case="null">No categories found!</h2>
-    <div th:case="*">
-        <h2>Categories</h2>
-        <div>
-        </div>
-        <table>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Status</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="category : ${categories}">
-                <td th:text="${category.getId()}"></td>
-                <td th:text="${category.getName()}"></td>
-                <td th:text="${category.getStatus()}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div th:each="category : ${categories}">
+    <a th:href="@{/categories/{id}(id=${category.getId()})}" th:text="${category.getName()}">Category</a>
+</div>
     <p><a th:href="@{/}">Home</a></p>
     <div sec:authorize="hasRole('ROLE_ADMIN')">
         <p><a th:href="@{/create_category}">Create new category</a></p>

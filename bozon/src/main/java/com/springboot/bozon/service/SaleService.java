@@ -1,6 +1,8 @@
 package com.springboot.bozon.service;
 
+import com.springboot.bozon.model.Post;
 import com.springboot.bozon.model.Sale;
+import com.springboot.bozon.model.User;
 
 import java.util.List;
 
@@ -12,7 +14,7 @@ public interface SaleService {
 
     List<Sale> findAll();
 
-    boolean save(Sale sale);
+    boolean save(Post post, User user);
 
     boolean deleteById(Long id);
 

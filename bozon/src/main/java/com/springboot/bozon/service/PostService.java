@@ -1,6 +1,7 @@
 package com.springboot.bozon.service;
 
 import com.springboot.bozon.model.Post;
+import com.springboot.bozon.model.Status;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,7 +15,13 @@ public interface PostService {
 
     List<Post> findAll();
 
+    List<Post> findAllActive();
+
     boolean save(Post post, String username);
 
     boolean deleteById(Long id);
+
+    List<Post> findByCategory(long categoryId);
+
+    void setStatus(Long postId, Status status);
 }

@@ -1,6 +1,7 @@
 package com.springboot.bozon.service;
 
 import com.springboot.bozon.model.Category;
+import com.springboot.bozon.model.Post;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface CategoryService {
     boolean save(Category category);
 
     boolean deleteById(Long id);
+
+
 }

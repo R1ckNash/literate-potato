@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +36,18 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAll();
     }
 
+    @Override
+    public List<Post> findAllActive() {
+        ArrayList<Post>postArrayList = new ArrayList<>();
+        List<Post>posts = findAll();
+        for(Post post : posts){
+            if (post.getStatus() == Status.ACTIVE){
+                postArrayList.add(post);
+            }
+        }
+        return postArrayList;
+    }
+
     public boolean save(Post post, String username) {
         User user = userRepository.findByUsername(username);
         post.setSeller(user);
@@ -49,5 +62,26 @@ public class PostServiceImpl implements PostService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Post> findByCategory(long categoryId) {
+        ArrayList<Post>postArrayList = new ArrayList<>();
+
+        List<Post> posts = findAllActive();
+
+        for(Post post : posts){
+            if (post.getCategory().getId() == categoryId){
+                postArrayList.add(post);
+            }
+        }
+        return postArrayList;
+    }
+
+    @Override
+    public void setStatus(Long postId, Status status) {
+        Post post = findById(postId);
+        post.setStatus(status);
+        postRepository.save(post);
     }
 }
