@@ -1,6 +1,7 @@
 package com.springboot.bozon.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
  * @author mialyshev
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "posts")
 @Data
