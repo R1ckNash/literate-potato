@@ -37,6 +37,8 @@ public class PostController {
         User user = (User) userRepository.findByUsername(currentUser.getUsername());
         model.addAttribute("currentUser", user);
         List<Post> posts = postService.findAll();
+        List<Category>categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
         model.addAttribute("posts", posts);
 
         return "post-list";

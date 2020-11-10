@@ -16,24 +16,25 @@
         <table>
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Price</th>
                 <th>Name</th>
+                <th>Price</th>
                 <th>Description</th>
-                <th>Created</th>
                 <th>Status</th>
-
+                <th>Category</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="post : ${posts}">
-                <td th:text="${post.id}"></td>
-                <td th:text="${post.price}"></td>
                 <td th:text="${post.name}"></td>
+                <td th:text="${post.price}"></td>
                 <td th:text="${post.description}"></td>
                 <td th:text="${post.status}"></td>
-                <td><a th:href="@{post-list}">Detail</a></td>
-                <td><a th:href="@{post-list}">Buy</a></td>
+                <td>
+                    <p th:each="category : ${categories}"
+                       th:if="(${category.id} == ${post.category.id})"
+                       th:text="${category.name}">
+                    </p>
+                </td>
             </tr>
             </tbody>
         </table>
