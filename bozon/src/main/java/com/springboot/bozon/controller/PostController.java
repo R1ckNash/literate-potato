@@ -38,12 +38,14 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String findAll(Model model) {
+    public String findAll(@AuthenticationPrincipal UserDetails currentUser,
+                          Model model) {
+        User user = userRepository.findByUsername(currentUser.getUsername());
         List<Post> posts = postService.findAllActive();
         List<Category>categories = categoryService.findAll();
+        model.addAttribute("currentUser", user);
         model.addAttribute("categories", categories);
         model.addAttribute("posts", posts);
-
         return "post-list";
     }
 
@@ -57,19 +59,36 @@ public class PostController {
 
     @PostMapping("/create_post")
     public String savePost(@ModelAttribute("postForm")Post postForm,
-                           @AuthenticationPrincipal UserDetails currentUser,
-                           Model model) {
+                           @AuthenticationPrincipal UserDetails currentUser) {
         postService.save(postForm, currentUser.getUsername());
         return "redirect:/posts";
     }
 
     @GetMapping("/buypost/{id}")
     public String buyPost(@PathVariable("id") long id,
-                          @AuthenticationPrincipal UserDetails currentUser,
-                          Model model){
+                          @AuthenticationPrincipal UserDetails currentUser){
         User user = userRepository.findByUsername(currentUser.getUsername());
         Post post = postService.findById(id);
         saleService.save(post, user);
+        postService.setStatus(id, Status.NOT_ACTIVE);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/userpost")
+    public String userPost(@AuthenticationPrincipal UserDetails currentUser,
+                          Model model){
+        User user = userRepository.findByUsername(currentUser.getUsername());
+        List<Post> posts = postService.findByUser(user.getId());
+        List<Category>categories = categoryService.findAll();
+        model.addAttribute("currentUser", user);
+        model.addAttribute("categories", categories);
+        model.addAttribute("posts", posts);
+        return "post-list";
+    }
+
+    @GetMapping("/closepost/{id}")
+    public String closePost(@PathVariable("id") long id,
+                          @AuthenticationPrincipal UserDetails currentUser){
         postService.setStatus(id, Status.NOT_ACTIVE);
         return "redirect:/posts";
     }

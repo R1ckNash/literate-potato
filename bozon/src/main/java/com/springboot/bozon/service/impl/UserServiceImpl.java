@@ -82,6 +82,17 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByPhoneNumber(phoneNumber) == null;
     }
 
+    @Override
+    public boolean updateUserInfo(User user, Long userId) {
+        User userFromDB = findById(userId);
+        userFromDB.setFirstName(user.getFirstName());
+        userFromDB.setLastName(user.getLastName());
+        userFromDB.setEmail(user.getEmail());
+        userFromDB.setPhoneNumber(user.getPhoneNumber());
+        userRepository.save(userFromDB);
+        return true;
+    }
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();

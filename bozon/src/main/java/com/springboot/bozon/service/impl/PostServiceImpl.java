@@ -6,6 +6,7 @@ import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.PostRepository;
 import com.springboot.bozon.repository.UserRepository;
 import com.springboot.bozon.service.PostService;
+import liquibase.pro.packaged.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -83,5 +84,17 @@ public class PostServiceImpl implements PostService {
         Post post = findById(postId);
         post.setStatus(status);
         postRepository.save(post);
+    }
+
+    @Override
+    public List<Post> findByUser(Long userId) {
+        List<Post>posts = findAllActive();
+        ArrayList<Post> userPosts = new ArrayList<>();
+        for(Post post : posts){
+            if(post.getSeller().getId() == userId){
+                userPosts.add(post);
+            }
+        }
+        return userPosts;
     }
 }

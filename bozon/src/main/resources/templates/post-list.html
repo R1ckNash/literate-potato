@@ -44,7 +44,16 @@
                         </td>
                     </div>
                 </div>
-                <td><a th:href="@{/buypost/{id}(id=${post.getId()})}">Buy</a></td>
+                <div th:if="${currentUser.id} != ${post.seller.id}">
+                    <td>
+                        <a th:href="@{/buypost/{id}(id=${post.getId()})}">Buy</a>
+                    </td>
+                </div>
+                <div th:if="${currentUser.id} == ${post.seller.id}">
+                    <td>
+                        <a th:href="@{/closepost/{id}(id=${post.getId()})}">Close post</a>
+                    </td>
+                </div>
             </tr>
             </tbody>
         </table>

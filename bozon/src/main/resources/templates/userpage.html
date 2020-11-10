@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Userinfo</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Username:</td>
+        <td th:text="*{userForm.getUsername()}"></td>
+    </tr>
+
+    <tr>
+        <td>First Name:</td>
+        <td th:text="*{userForm.getFirstName()}"></td>
+    </tr>
+
+    <tr>
+        <td>Last Name:</td>
+        <td th:text="*{userForm.getLastName()}"></td>
+    </tr>
+
+    <tr>
+        <td>Email:</td>
+        <td th:text="*{userForm.getEmail()}"></td>
+    </tr>
+
+
+    <tr>
+        <td>Phone Number:</td>
+        <td th:text="*{userForm.getPhoneNumber()}"></td>
+    </tr>
+</table>
+<p><a href="/">Home</a></p>
+<p><a href="/useredit">Edit</a></p>
+<p><a href="/userpost">My posts</a></p>
+</body>
+</html>

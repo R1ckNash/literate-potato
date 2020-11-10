@@ -25,4 +25,6 @@ public interface UserService{
 
     boolean findByPhoneNumber(String phoneNumber);
 
+    boolean updateUserInfo(User user, Long userId);
+
 }
