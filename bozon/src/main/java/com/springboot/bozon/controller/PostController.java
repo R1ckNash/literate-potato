@@ -8,6 +8,7 @@ import com.springboot.bozon.repository.UserRepository;
 import com.springboot.bozon.service.impl.CategoryServiceImpl;
 import com.springboot.bozon.service.impl.PostServiceImpl;
 import com.springboot.bozon.service.impl.SaleServiceImpl;
+import com.springboot.bozon.service.impl.UserServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -25,13 +26,13 @@ import java.util.List;
 @Controller
 public class PostController {
 
-    private final UserRepository userRepository;
+    private final UserServiceImpl userService;
     private final PostServiceImpl postService;
     private final SaleServiceImpl saleService;
     private CategoryServiceImpl categoryService;
 
-    public PostController(UserRepository userRepository, PostServiceImpl postService, SaleServiceImpl saleService, CategoryServiceImpl categoryService) {
-        this.userRepository = userRepository;
+    public PostController(UserRepository userRepository, UserServiceImpl userService, PostServiceImpl postService, SaleServiceImpl saleService, CategoryServiceImpl categoryService) {
+        this.userService = userService;
         this.postService = postService;
         this.saleService = saleService;
         this.categoryService = categoryService;
@@ -40,7 +41,7 @@ public class PostController {
     @GetMapping("/posts")
     public String findAll(@AuthenticationPrincipal UserDetails currentUser,
                           Model model) {
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = userService.findByUsername(currentUser.getUsername());
         List<Post> posts = postService.findAllActive();
         List<Category>categories = categoryService.findAll();
         model.addAttribute("currentUser", user);
@@ -67,7 +68,7 @@ public class PostController {
     @GetMapping("/buypost/{id}")
     public String buyPost(@PathVariable("id") long id,
                           @AuthenticationPrincipal UserDetails currentUser){
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = userService.findByUsername(currentUser.getUsername());
         Post post = postService.findById(id);
         saleService.save(post, user);
         postService.setStatus(id, Status.NOT_ACTIVE);
@@ -77,7 +78,7 @@ public class PostController {
     @GetMapping("/userpost")
     public String userPost(@AuthenticationPrincipal UserDetails currentUser,
                           Model model){
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = userService.findByUsername(currentUser.getUsername());
         List<Post> posts = postService.findByUser(user.getId());
         List<Category>categories = categoryService.findAll();
         model.addAttribute("currentUser", user);

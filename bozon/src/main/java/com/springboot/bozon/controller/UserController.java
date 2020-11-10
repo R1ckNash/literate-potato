@@ -18,18 +18,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
 
-    private final UserRepository userRepository;
     private final UserServiceImpl userService;
 
-    public UserController(UserRepository userRepository, UserServiceImpl userService) {
-        this.userRepository = userRepository;
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
     @GetMapping("/userpage")
     public String getUser(@AuthenticationPrincipal UserDetails currentUser,
                           Model model){
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = userService.findByUsername(currentUser.getUsername());
         model.addAttribute("userForm", user);
         return "userpage";
     }
@@ -37,7 +35,7 @@ public class UserController {
     @GetMapping("/useredit")
     public String editUser(@AuthenticationPrincipal UserDetails currentUser,
                            Model model){
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = userService.findByUsername(currentUser.getUsername());
         model.addAttribute("userForm", user);
         return "useredit";
     }
@@ -46,7 +44,7 @@ public class UserController {
     public String updateUser(@AuthenticationPrincipal UserDetails currentUser,
                              @ModelAttribute("userForm")User userForm,
                              Model model){
-        User user = userRepository.findByUsername(currentUser.getUsername());
+        User user = userService.findByUsername(currentUser.getUsername());
         if (!user.getEmail().equals(userForm.getEmail())){
             if(!userService.findByEmail(userForm.getEmail())){
                 model.addAttribute("emailError", "Пользователь с таким email уже существует");
