@@ -39,12 +39,9 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String findAll(@AuthenticationPrincipal UserDetails currentUser,
-                          Model model) {
-        User user = userService.findByUsername(currentUser.getUsername());
+    public String findAll(Model model) {
         List<Post> posts = postService.findAllActive();
         List<Category>categories = categoryService.findAll();
-        model.addAttribute("currentUser", user);
         model.addAttribute("categories", categories);
         model.addAttribute("posts", posts);
         return "post-list";
@@ -80,17 +77,24 @@ public class PostController {
                           Model model){
         User user = userService.findByUsername(currentUser.getUsername());
         List<Post> posts = postService.findByUser(user.getId());
-        List<Category>categories = categoryService.findAll();
-        model.addAttribute("currentUser", user);
-        model.addAttribute("categories", categories);
         model.addAttribute("posts", posts);
         return "post-list";
     }
 
     @GetMapping("/closepost/{id}")
-    public String closePost(@PathVariable("id") long id,
-                          @AuthenticationPrincipal UserDetails currentUser){
+    public String closePost(@PathVariable("id") long id){
         postService.setStatus(id, Status.NOT_ACTIVE);
         return "redirect:/posts";
+    }
+
+    @GetMapping("/post/{id}")
+    public String getPost(@PathVariable("id") long id,
+                          @AuthenticationPrincipal UserDetails currentUser,
+                          Model model){
+        User user = userService.findByUsername(currentUser.getUsername());
+        Post post = postService.findById(id);
+        model.addAttribute("currentUser", user);
+        model.addAttribute("postForm", post);
+        return "post";
     }
 }

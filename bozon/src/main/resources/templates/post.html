@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+</head>
+<body>
+    <p>
+        Name : <span th:text="*{postForm.name}"></span>
+    </p>
+    <p>
+        Price : <span th:text="*{postForm.price}"></span>
+    </p>
+    <p>
+        Description : <span th:text="*{postForm.description}"></span>
+    </p>
+    <div>
+        <img th:src="*{postForm.url}"
+             width="189" height="255" alt="lorem">
+    </div>
+    <p th:if="${currentUser.id} != ${postForm.seller.id}">
+        <a th:href="@{/buypost/{id}(id=${postForm.getId()})}">Buy</a>
+    </p>
+    <p th:if="${currentUser.id} == ${postForm.seller.id}">
+        <a th:href="@{/closepost/{id}(id=${postForm.getId()})}">Close post</a>
+    </p>
+<p><a href="/">Home</a></p>
+</body>
+</html>

@@ -44,13 +44,9 @@ public class CategoryController {
 
     @GetMapping("/categories/{id}")
     public String getCategory(@PathVariable("id") long id,
-                              @AuthenticationPrincipal UserDetails currentUser,
                               Model model){
-        User user = userService.findByUsername(currentUser.getUsername());
         List<Post>posts = postService.findByCategory(id);
         Category category = categoryService.findById(id);
-        model.addAttribute("currentUser", user);
-        model.addAttribute("categoryName", category.getName());
         model.addAttribute("posts", posts);
         return "post-list";
     }

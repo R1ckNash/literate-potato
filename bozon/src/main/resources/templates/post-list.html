@@ -2,61 +2,22 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Bozon</title>
+    <title>Posts</title>
 </head>
 <body>
-<div th:switch="${posts}">
-    <h2 th:case="null">No posts found!</h2>
-    <div th:case="*">
-        <h2>Posts</h2>
-        <div>
-        </div>
-        <table>
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Category</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="post : ${posts}">
-                <td th:text="${post.name}"></td>
-                <td th:text="${post.price}"></td>
-                <td th:text="${post.description}"></td>
-                <td th:text="${post.status}"></td>
-                <div th:if="${categories}">
-                    <td>
-                        <p th:each="category : ${categories}"
-                           th:if="(${category.id} == ${post.category.id})"
-                           th:text="${category.name}">
-                        </p>
-                    </td>
-                </div>
-                <div>
-                    <div th:if="${categoryName}">
-                        <td>
-                            <p
-                               th:text="${categoryName}">
-                            </p>
-                        </td>
-                    </div>
-                </div>
-                <div th:if="${currentUser.id} != ${post.seller.id}">
-                    <td>
-                        <a th:href="@{/buypost/{id}(id=${post.getId()})}">Buy</a>
-                    </td>
-                </div>
-                <div th:if="${currentUser.id} == ${post.seller.id}">
-                    <td>
-                        <a th:href="@{/closepost/{id}(id=${post.getId()})}">Close post</a>
-                    </td>
-                </div>
-            </tr>
-            </tbody>
-        </table>
+    <div th:each="post : ${posts}">
+        <p>
+            Name : <span th:text="*{post.name}"></span>
+        </p>
+        <p>
+            Price : <span th:text="*{post.price}"></span>
+        </p>
+        <p>
+            <a th:href="@{/post/{id}(id=${post.getId()})}">
+                <img th:src="${post.url}"
+                     width="189" height="255" alt="lorem">
+            </a>
+        </p>
     </div>
     <p><a href="/">Home</a></p>
     <p><a href="/create_post">Create post</a></p>
