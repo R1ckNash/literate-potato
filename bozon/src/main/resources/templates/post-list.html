@@ -1,44 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Bozon</title>
+    <title>Posts</title>
 </head>
 <body>
-<div th:switch="${posts}">
-    <h2 th:case="null">No posts found!</h2>
-    <div th:case="*">
-        <h2>Posts</h2>
-        <div>
-        </div>
-        <table>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Price</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Created</th>
-                <th>Status</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="post : ${posts}">
-                <td th:text="${post.id}"></td>
-                <td th:text="${post.price}"></td>
-                <td th:text="${post.name}"></td>
-                <td th:text="${post.description}"></td>
-                <td th:text="${post.created}"></td>
-                <td th:text="${post.status}"></td>
-                <td><a th:href="@{post-list}">Detail</a></td>
-                <td><a th:href="@{post-list}">Buy</a></td>
-            </tr>
-            </tbody>
-        </table>
+    <div th:each="post : ${posts}">
+        <p>
+            Name : <span th:text="*{post.name}"></span>
+        </p>
+        <p>
+            Price : <span th:text="*{post.price}"></span>
+        </p>
+        <p>
+            <a th:href="@{/post/{id}(id=${post.getId()})}">
+                <img th:src="${post.url}"
+                     width="189" height="255" alt="lorem">
+            </a>
+        </p>
     </div>
-    <p><a href="/">Create post</a></p>
+    <p><a href="/">Home</a></p>
+    <p><a href="/create_post">Create post</a></p>
 </div>
 </body>
 </html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome</title>
+</head>
+<body>
+    <span sec:authorize="!isAuthenticated()">
+        <p><a th:href="@{/login}">Login</a></p>
+        <p><a th:href="@{/registration}">Registration</a></p>
+    </span>
+    <span sec:authorize="isAuthenticated()">
+        <h1>Welcome, <span sec:authentication="name">Username</span></h1>
+        <p><a th:href="@{/logout}">Logout</a></p>
+        <p><a th:href="@{/posts}">All posts</a></p>
+        <p><a th:href="@{/categories}">All categories</a></p>
+        <p><a th:href="@{/userpage}">User info</a></p>
+    </span>
+</body>
+</html>

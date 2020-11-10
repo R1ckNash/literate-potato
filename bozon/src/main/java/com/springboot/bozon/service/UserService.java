@@ -1,50 +1,30 @@
 package com.springboot.bozon.service;
 
 import com.springboot.bozon.model.User;
-import com.springboot.bozon.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ricknash
+ * @author mialyshev
  */
+
 @Service
-public class UserService {
-    private final UserRepository userRepository;
+public interface UserService{
+    boolean save(User user);
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    User findByUsername(String username);
 
-    public User findById(Long id) {
-        return userRepository.getOne(id);
-    }
+    List<User> getAll();
 
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
+    User findById(Long id);
 
-    public void saveUser(User user) {
-        userRepository.save(user);
-    }
+    boolean delete(Long id);
 
-    public void deleteById(Long id) {
-        userRepository.deleteById(id);
-    }
+    boolean findByEmail(String email);
 
-    public List<User> findByLastName(String lastName) {
-        List<User> all = userRepository.findAll();
-        List<User> result = new ArrayList<>();
-        for (User user : all) {
-            if (lastName.equals(user.getLastName())){
-                result.add(user);
-            }
-        }
-        return result;
-    }
+    boolean findByPhoneNumber(String phoneNumber);
+
+    boolean updateUserInfo(User user, Long userId);
 
 }

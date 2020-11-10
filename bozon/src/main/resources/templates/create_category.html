@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new category</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/create_category}" th:object="${categoryForm}">
+    <h2>Create</h2>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <div th:if="${nameError}">
+                <div style="color: red" th:text="${nameError}"></div>
+            </div>
+        </tr>
+
+        <tr>
+            <td><input name="submit" type="submit" value="Create!" /></td>
+        </tr>
+    </table>
+    <p><a th:href="@{/}">Home</a></p>
+</form>
+</body>
+</html>

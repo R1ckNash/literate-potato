@@ -1,37 +1,30 @@
 package com.springboot.bozon.service;
 
 import com.springboot.bozon.model.Post;
-import com.springboot.bozon.repository.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.springboot.bozon.model.Status;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
 /**
- * @author ricknash
+ * @author mialyshev
  */
-@Service
-public class PostService {
-    private final PostRepository postRepository;
+public interface PostService {
+    Post findById(Long id);
 
-    @Autowired
-    public PostService(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
+    List<Post> findAll();
 
-    public Post findById(Long id) {
-        return postRepository.getOne(id);
-    }
+    List<Post> findAllActive();
 
-    public List<Post> findAll() {
-        return postRepository.findAll();
-    }
+    boolean save(Post post, String username);
 
-    public void savePost(Post post) {
-        postRepository.save(post);
-    }
+    boolean deleteById(Long id);
 
-    public void deleteById(Long id) {
-        postRepository.deleteById(id);
-    }
+    List<Post> findByCategory(long categoryId);
+
+    void setStatus(Long postId, Status status);
+
+    List<Post>findByUser(Long userId);
+
 }

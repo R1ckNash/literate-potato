@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:method="POST" th:action="@{/registration}" th:object="${userForm}">
+        <h2>Регистрация</h2>
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" th:field="*{username}"/></td>
+                <div th:if="${usernameError}">
+                    <div style="color: red" th:text="${usernameError}"></div>
+                </div>
+            </tr>
+
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" th:field="*{firstName}"/></td>
+            </tr>
+
+            <tr>
+                <td>Last Name:</td>
+                <td><input type="text" th:field="*{lastName}"/></td>
+            </tr>
+
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" th:field="*{email}"/></td>
+                <div th:if="${emailError}">
+                    <div style="color: red" th:text="${emailError}"></div>
+                </div>
+            </tr>
+
+            <tr>
+                <td>Password:</td>
+                <td><input type="text" th:field="*{password}"/></td>
+            </tr>
+
+            <tr>
+                <td>Confirm Password:</td>
+                <td><input type="text" th:field="*{confirmPassword}"/></td>
+                <div th:if="${passwordError}">
+                    <div style="color: red" th:text="${passwordError}"></div>
+                </div>
+            </tr>
+
+            <tr>
+                <td>Phone Number:</td>
+                <td><input type="text" th:field="*{phoneNumber}"/></td>
+                <div th:if="${phoneError}">
+                    <div style="color: red" th:text="${phoneError}"></div>
+                </div>
+            </tr>
+
+            <tr>
+                <td><input name="submit" type="submit" value="Register!" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

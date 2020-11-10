@@ -1,38 +1,21 @@
 package com.springboot.bozon.service;
 
+import com.springboot.bozon.model.Post;
 import com.springboot.bozon.model.Sale;
-import com.springboot.bozon.repository.SaleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.springboot.bozon.model.User;
 
 import java.util.List;
 
 /**
- * @author ricknash
+ * @author mialyshev
  */
-@Service
-public class SaleService {
+public interface SaleService {
+    Sale findById(Long id);
 
-    private final SaleRepository saleRepository;
+    List<Sale> findAll();
 
-    @Autowired
-    public SaleService(SaleRepository saleRepository) {
-        this.saleRepository = saleRepository;
-    }
+    boolean save(Post post, User user);
 
-    public Sale findById(Long id) {
-        return saleRepository.getOne(id);
-    }
+    boolean deleteById(Long id);
 
-    public List<Sale> findAll() {
-        return saleRepository.findAll();
-    }
-
-    public void saveSale(Sale sale) {
-        saleRepository.save(sale);
-    }
-
-    public void deleteById(Long id) {
-        saleRepository.deleteById(id);
-    }
 }

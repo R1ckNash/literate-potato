@@ -1,37 +1,21 @@
 package com.springboot.bozon.service;
 
 import com.springboot.bozon.model.Category;
-import com.springboot.bozon.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.springboot.bozon.model.Post;
 
 import java.util.List;
 
 /**
- * @author ricknash
+ * @author mialyshev
  */
-@Service
-public class CategoryService {
-    private final CategoryRepository categoryRepository;
+public interface CategoryService {
+    Category findById(Long id);
 
-    @Autowired
-    public CategoryService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
+    List<Category> findAll();
 
-    public Category findById(Long id) {
-        return categoryRepository.getOne(id);
-    }
+    boolean save(Category category);
 
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
-    }
+    boolean deleteById(Long id);
 
-    public void saveCategory(Category category) {
-        categoryRepository.save(category);
-    }
 
-    public void deleteById(Long id) {
-        categoryRepository.deleteById(id);
-    }
 }

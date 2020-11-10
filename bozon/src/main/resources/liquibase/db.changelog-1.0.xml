@@ -9,6 +9,10 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
+            <column name="username" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
             <column name="first_name" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
@@ -29,13 +33,6 @@
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="created" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="updated" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
-            </column>
 
             <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
                 <constraints nullable="false"/>
@@ -57,14 +54,6 @@
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="created" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="updated" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
-            </column>
-
             <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
                 <constraints nullable="false"/>
             </column>
@@ -79,14 +68,6 @@
 
             <column name="name" type="VARCHAR(100)">
                 <constraints nullable="false" unique="true"/>
-            </column>
-
-            <column name="created" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="updated" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
             </column>
 
             <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
@@ -117,14 +98,6 @@
                 <constraints nullable="false" unique="true"/>
             </column>
 
-            <column name="created" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="updated" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
-            </column>
-
             <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
                 <constraints nullable="false"/>
             </column>
@@ -141,14 +114,6 @@
         <createTable tableName="sales">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-
-            <column name="created" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="updated" type="TIMESTAMP" defaultValue="NOW()">
-                <constraints nullable="false"/>
             </column>
 
             <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
