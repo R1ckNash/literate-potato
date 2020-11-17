@@ -37,13 +37,13 @@ public class User extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "role_id")
     private Role role;
 
     @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER)
     private List<Post> posts;
 
-    @OneToOne(mappedBy = "buyer", fetch = FetchType.EAGER)
-    private Sale sale;
+    @OneToMany(mappedBy = "buyer", fetch = FetchType.EAGER)
+    private List<Sale> sales;
 }

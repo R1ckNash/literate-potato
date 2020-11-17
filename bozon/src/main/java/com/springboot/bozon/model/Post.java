@@ -25,14 +25,14 @@ public class Post extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn (name="category_id")
     private Category category;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn (name="user_id")
     private User seller;
 
-    @OneToOne (mappedBy="post", fetch = FetchType.EAGER)
+    @OneToOne (mappedBy="post",  fetch = FetchType.EAGER)
     private Sale sale;
 }

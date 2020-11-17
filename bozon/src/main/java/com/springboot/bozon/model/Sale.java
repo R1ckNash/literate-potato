@@ -17,7 +17,7 @@ public class Sale extends BaseEntity{
     @JoinColumn(name="post_id")
     private Post post;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="buyer_id")
     private User buyer;
 }
