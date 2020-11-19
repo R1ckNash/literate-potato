@@ -11,11 +11,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -60,7 +62,13 @@ public class CategoryController {
 
     @PostMapping("/create_category")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String saveCategory(@ModelAttribute("categoryForm") Category categoryForm,  Model model){
+    public String saveCategory(@ModelAttribute("categoryForm") @Valid Category categoryForm,
+                               BindingResult bindingResult,
+                               Model model){
+        if (bindingResult.hasErrors()) {
+            return "create_category";
+        }
+
         if(!categoryService.save(categoryForm)){
             model.addAttribute("nameError", "Категория с таким именем уже существует");
             return "create_category";

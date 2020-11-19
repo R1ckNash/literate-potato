@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>People</title>
+</head>
+<body>
+
+<p th:text="${post.getId()}">Id</p>
+<p th:text="${post.getName()}">Name</p>
+<p th:text="${post.description}">Description</p>
+<p th:text="${post.status}">Status</p>
+<p th:text="${post.price}">Price</p>
+
+<br/>
+<hr/>
+
+<p>Тут будет кнопка Edit если запись принадлежит тебе</p>
+<p>Тут будет кнопка Delete если запись принадлежит тебе</p>
+
+
+</body>
+</html>

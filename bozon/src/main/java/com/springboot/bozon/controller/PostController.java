@@ -13,11 +13,13 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -56,8 +58,14 @@ public class PostController {
     }
 
     @PostMapping("/create_post")
-    public String savePost(@ModelAttribute("postForm")Post postForm,
+    public String savePost(Model model, @ModelAttribute("postForm") @Valid Post postForm,
+                           BindingResult bindingResult,
                            @AuthenticationPrincipal UserDetails currentUser) {
+        if (bindingResult.hasErrors()) {
+            List<Category> categories = categoryService.findAll();
+            model.addAttribute("categories", categories);
+            return "create-post"; //баг , не выводятся категории
+        }
         postService.save(postForm, currentUser.getUsername());
         return "redirect:/posts";
     }

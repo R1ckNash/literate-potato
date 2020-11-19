@@ -2,8 +2,9 @@ package com.springboot.bozon.service;
 
 import com.springboot.bozon.model.Post;
 import com.springboot.bozon.model.Status;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.springboot.bozon.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

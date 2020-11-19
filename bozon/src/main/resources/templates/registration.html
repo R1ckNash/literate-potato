@@ -14,16 +14,19 @@
                 <div th:if="${usernameError}">
                     <div style="color: red" th:text="${usernameError}"></div>
                 </div>
+                <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" >username error</div>
             </tr>
 
             <tr>
                 <td>First Name:</td>
                 <td><input type="text" th:field="*{firstName}"/></td>
+                <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" >firstName error</div>
             </tr>
 
             <tr>
                 <td>Last Name:</td>
                 <td><input type="text" th:field="*{lastName}"/></td>
+                <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" >lastName error</div>
             </tr>
 
             <tr>
@@ -32,11 +35,13 @@
                 <div th:if="${emailError}">
                     <div style="color: red" th:text="${emailError}"></div>
                 </div>
+                <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >email error</div>
             </tr>
 
             <tr>
                 <td>Password:</td>
                 <td><input type="text" th:field="*{password}"/></td>
+                <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" >password error</div>
             </tr>
 
             <tr>
@@ -45,6 +50,7 @@
                 <div th:if="${passwordError}">
                     <div style="color: red" th:text="${passwordError}"></div>
                 </div>
+                <div style="color:red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" >confirmPassword error</div>
             </tr>
 
             <tr>
@@ -53,6 +59,7 @@
                 <div th:if="${phoneError}">
                     <div style="color: red" th:text="${phoneError}"></div>
                 </div>
+                <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" >phoneNumber error</div>
             </tr>
 
             <tr>
