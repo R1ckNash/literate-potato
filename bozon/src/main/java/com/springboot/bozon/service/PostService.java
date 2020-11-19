@@ -26,5 +26,4 @@ public interface PostService {
     void setStatus(Long postId, Status status);
 
     List<Post>findByUser(Long userId);
-
 }
