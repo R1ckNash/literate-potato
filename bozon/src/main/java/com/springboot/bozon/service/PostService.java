@@ -1,6 +1,7 @@
 package com.springboot.bozon.service;
 
 import com.springboot.bozon.model.Post;
+import com.springboot.bozon.model.Status;
 import com.springboot.bozon.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
