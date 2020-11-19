@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -17,6 +19,8 @@ import java.util.List;
 public class Category extends BaseEntity {
 
     @Column(name = "name")
+    @NotEmpty(message = "name should not be empty")
+    @Size(min = 2, max = 15)
     private String name;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)

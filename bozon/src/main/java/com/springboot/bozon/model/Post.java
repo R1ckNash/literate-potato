@@ -4,6 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author mialyshev
@@ -16,15 +20,20 @@ import javax.persistence.*;
 public class Post extends BaseEntity {
 
     @Column(name = "name")
+    @NotEmpty(message = "name should not be empty")
+    @Size(min = 2, max = 15)
     private String name;
 
     @Column(name = "price")
+    @NotNull
     private int price;
 
     @Column(name = "picture_url")
     private String url;
 
     @Column(name = "description")
+    @NotEmpty(message = "description should not be empty")
+    @Size(min = 2, max = 15)
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

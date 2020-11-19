@@ -1,13 +1,18 @@
 package com.springboot.bozon.controller;
 
+import com.springboot.bozon.model.Category;
 import com.springboot.bozon.model.User;
 import com.springboot.bozon.service.impl.UserDetailsServiceImpl;
 import com.springboot.bozon.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author mialyshev
@@ -34,7 +39,14 @@ public class RegistrationController {
 
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm")User userForm, Model model) {
+    public String addUser(@ModelAttribute("userForm") @Valid User userForm,
+                          BindingResult bindingResult,
+                          Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+
         if (!userForm.getPassword().equals(userForm.getConfirmPassword())){
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";

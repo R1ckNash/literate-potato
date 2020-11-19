@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Create post</title>
@@ -43,8 +43,12 @@
 
         <tr>
             <td><input name="submit" type="submit" value="submit" /></td>
+            <td><a th:href="@{/}">Home</a></td>
         </tr>
     </table>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" >name error</div>
+    <div style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}" >price error</div>
+    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}" >description error</div>
 </form>
 
 </body>
