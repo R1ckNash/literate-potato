@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -37,13 +36,13 @@ public class Post extends BaseEntity {
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn (name="category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn (name="user_id")
+    @JoinColumn(name = "user_id")
     private User seller;
 
-    @OneToOne (mappedBy="post",  fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "post", fetch = FetchType.EAGER)
     private Sale sale;
 }

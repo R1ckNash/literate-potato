@@ -2,13 +2,10 @@ package com.springboot.bozon.controller;
 
 import com.springboot.bozon.model.Category;
 import com.springboot.bozon.model.Post;
-import com.springboot.bozon.model.User;
 import com.springboot.bozon.service.impl.CategoryServiceImpl;
 import com.springboot.bozon.service.impl.PostServiceImpl;
 import com.springboot.bozon.service.impl.UserServiceImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,16 +35,16 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public String getCategories(Model model){
-        List<Category>categories = categoryService.findAll();
+    public String getCategories(Model model) {
+        List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
         return "categories";
     }
 
     @GetMapping("/categories/{id}")
     public String getCategory(@PathVariable("id") long id,
-                              Model model){
-        List<Post>posts = postService.findByCategory(id);
+                              Model model) {
+        List<Post> posts = postService.findByCategory(id);
         Category category = categoryService.findById(id);
         model.addAttribute("posts", posts);
         return "post-list";
@@ -55,7 +52,7 @@ public class CategoryController {
 
     @GetMapping("/create_category")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String createCategory(Model model){
+    public String createCategory(Model model) {
         model.addAttribute("categoryForm", new Category());
         return "create_category";
     }
@@ -64,12 +61,12 @@ public class CategoryController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String saveCategory(@ModelAttribute("categoryForm") @Valid Category categoryForm,
                                BindingResult bindingResult,
-                               Model model){
+                               Model model) {
         if (bindingResult.hasErrors()) {
             return "create_category";
         }
 
-        if(!categoryService.save(categoryForm)){
+        if (!categoryService.save(categoryForm)) {
             model.addAttribute("nameError", "Категория с таким именем уже существует");
             return "create_category";
         }

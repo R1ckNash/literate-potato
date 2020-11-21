@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
     public boolean save(Category category) {
         Category categoryFromDB = categoryRepository.findByName(category.getName());
 
-        if(categoryFromDB != null){
+        if (categoryFromDB != null) {
             return false;
         }
         category.setStatus(Status.ACTIVE);

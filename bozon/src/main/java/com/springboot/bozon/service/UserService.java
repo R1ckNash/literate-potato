@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 @Service
-public interface UserService{
+public interface UserService {
     boolean save(User user);
 
     User findByUsername(String username);

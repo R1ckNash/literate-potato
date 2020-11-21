@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean findByPhoneNumber(String phoneNumber){
+    public boolean findByPhoneNumber(String phoneNumber) {
         return userRepository.findByPhoneNumber(phoneNumber) == null;
     }
 
