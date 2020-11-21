@@ -1,6 +1,5 @@
 package com.springboot.bozon.controller;
 
-import com.springboot.bozon.model.Category;
 import com.springboot.bozon.model.User;
 import com.springboot.bozon.service.impl.UserDetailsServiceImpl;
 import com.springboot.bozon.service.impl.UserServiceImpl;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * @author mialyshev
@@ -47,22 +45,22 @@ public class RegistrationController {
             return "registration";
         }
 
-        if (!userForm.getPassword().equals(userForm.getConfirmPassword())){
+        if (!userForm.getPassword().equals(userForm.getConfirmPassword())) {
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
         }
 
-        if(!userService.findByEmail(userForm.getEmail())){
+        if (!userService.findByEmail(userForm.getEmail())) {
             model.addAttribute("emailError", "Пользователь с таким email уже существует");
             return "registration";
         }
 
-        if(!userService.findByPhoneNumber(userForm.getPhoneNumber())){
+        if (!userService.findByPhoneNumber(userForm.getPhoneNumber())) {
             model.addAttribute("phoneError", "Пользователь с таким номером телефона уже существует");
             return "registration";
         }
 
-        if (!userService.save(userForm)){
+        if (!userService.save(userForm)) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }

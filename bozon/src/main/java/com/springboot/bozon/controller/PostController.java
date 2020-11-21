@@ -43,7 +43,7 @@ public class PostController {
     @GetMapping("/posts")
     public String findAll(Model model) {
         List<Post> posts = postService.findAllActive();
-        List<Category>categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
         model.addAttribute("posts", posts);
         return "post-list";
@@ -52,7 +52,7 @@ public class PostController {
     @GetMapping("/create_post")
     public String getAllPost(Model model) {
         model.addAttribute("postForm", new Post());
-        List<Category>categories = categoryService.findAll();
+        List<Category> categories = categoryService.findAll();
         model.addAttribute("categories", categories);
         return "create-post";
     }
@@ -72,7 +72,7 @@ public class PostController {
 
     @GetMapping("/buypost/{id}")
     public String buyPost(@PathVariable("id") long id,
-                          @AuthenticationPrincipal UserDetails currentUser){
+                          @AuthenticationPrincipal UserDetails currentUser) {
         User user = userService.findByUsername(currentUser.getUsername());
         Post post = postService.findById(id);
         saleService.save(post, user);
@@ -82,7 +82,7 @@ public class PostController {
 
     @GetMapping("/userpost")
     public String userPost(@AuthenticationPrincipal UserDetails currentUser,
-                          Model model){
+                           Model model) {
         User user = userService.findByUsername(currentUser.getUsername());
         List<Post> posts = postService.findByUser(user.getId());
         model.addAttribute("posts", posts);
@@ -90,7 +90,7 @@ public class PostController {
     }
 
     @GetMapping("/closepost/{id}")
-    public String closePost(@PathVariable("id") long id){
+    public String closePost(@PathVariable("id") long id) {
         postService.setStatus(id, Status.NOT_ACTIVE);
         return "redirect:/posts";
     }
@@ -98,7 +98,7 @@ public class PostController {
     @GetMapping("/post/{id}")
     public String getPost(@PathVariable("id") long id,
                           @AuthenticationPrincipal UserDetails currentUser,
-                          Model model){
+                          Model model) {
         User user = userService.findByUsername(currentUser.getUsername());
         Post post = postService.findById(id);
         model.addAttribute("currentUser", user);

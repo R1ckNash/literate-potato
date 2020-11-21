@@ -5,7 +5,6 @@ import com.springboot.bozon.model.Sale;
 import com.springboot.bozon.model.Status;
 import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.SaleRepository;
-import com.springboot.bozon.service.PostService;
 import com.springboot.bozon.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

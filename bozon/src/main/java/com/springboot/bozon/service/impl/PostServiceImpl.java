@@ -6,9 +6,7 @@ import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.PostRepository;
 import com.springboot.bozon.repository.UserRepository;
 import com.springboot.bozon.service.PostService;
-import liquibase.pro.packaged.A;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

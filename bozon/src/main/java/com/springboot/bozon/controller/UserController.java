@@ -1,7 +1,6 @@
 package com.springboot.bozon.controller;
 
 import com.springboot.bozon.model.User;
-import com.springboot.bozon.repository.UserRepository;
 import com.springboot.bozon.service.impl.UserServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +25,7 @@ public class UserController {
 
     @GetMapping("/userpage")
     public String getUser(@AuthenticationPrincipal UserDetails currentUser,
-                          Model model){
+                          Model model) {
         User user = userService.findByUsername(currentUser.getUsername());
         model.addAttribute("userForm", user);
         return "userpage";
@@ -34,7 +33,7 @@ public class UserController {
 
     @GetMapping("/useredit")
     public String editUser(@AuthenticationPrincipal UserDetails currentUser,
-                           Model model){
+                           Model model) {
         User user = userService.findByUsername(currentUser.getUsername());
         model.addAttribute("userForm", user);
         return "useredit";
@@ -42,18 +41,18 @@ public class UserController {
 
     @PostMapping("/useredit")
     public String updateUser(@AuthenticationPrincipal UserDetails currentUser,
-                             @ModelAttribute("userForm")User userForm,
-                             Model model){
+                             @ModelAttribute("userForm") User userForm,
+                             Model model) {
         User user = userService.findByUsername(currentUser.getUsername());
-        if (!user.getEmail().equals(userForm.getEmail())){
-            if(!userService.findByEmail(userForm.getEmail())){
+        if (!user.getEmail().equals(userForm.getEmail())) {
+            if (!userService.findByEmail(userForm.getEmail())) {
                 model.addAttribute("emailError", "Пользователь с таким email уже существует");
                 return "useredit";
             }
         }
 
-        if (!user.getPhoneNumber().equals(userForm.getPhoneNumber())){
-            if(!userService.findByPhoneNumber(userForm.getPhoneNumber())){
+        if (!user.getPhoneNumber().equals(userForm.getPhoneNumber())) {
+            if (!userService.findByPhoneNumber(userForm.getPhoneNumber())) {
                 model.addAttribute("phoneError", "Пользователь с таким номером телефона уже существует");
                 return "useredit";
             }

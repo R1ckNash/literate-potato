@@ -11,13 +11,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "sales")
 @Data
-public class Sale extends BaseEntity{
+public class Sale extends BaseEntity {
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="post_id")
+    @JoinColumn(name = "post_id")
     private Post post;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name="buyer_id")
+    @JoinColumn(name = "buyer_id")
     private User buyer;
 }

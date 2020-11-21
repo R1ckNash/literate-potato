@@ -1,12 +1,14 @@
 package com.springboot.bozon.service.details;
 
-import java.util.*;
-
 import com.springboot.bozon.model.Role;
 import com.springboot.bozon.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author mialyshev
