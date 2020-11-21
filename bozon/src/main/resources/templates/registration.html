@@ -20,18 +20,18 @@
             <tr>
                 <td>First Name:</td>
                 <td><input type="text" th:field="*{firstName}"/></td>
-                <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" >firstName error</div>
+                <td style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" >firstName error</td>
             </tr>
 
             <tr>
                 <td>Last Name:</td>
-                <td><input type="text" th:field="*{lastName}"/></td>
+                <td><input type="text" th:field="*{lastName}" required/></td>
                 <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" >lastName error</div>
             </tr>
 
             <tr>
                 <td>Email:</td>
-                <td><input type="text" th:field="*{email}"/></td>
+                <td><input type="email" th:field="*{email}" required/></td>
                 <div th:if="${emailError}">
                     <div style="color: red" th:text="${emailError}"></div>
                 </div>
