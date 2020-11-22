@@ -6,9 +6,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author mialyshev
@@ -41,8 +46,26 @@ public class UserController {
 
     @PostMapping("/useredit")
     public String updateUser(@AuthenticationPrincipal UserDetails currentUser,
-                             @ModelAttribute("userForm") User userForm,
+                             @ModelAttribute("userForm") @Valid User userForm,
+                             BindingResult bindingResult,
                              Model model) {
+        if (bindingResult.hasErrors()) {
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors ) {
+                if (error.getField().equals("firstName")){
+                    return "useredit";
+                }
+                if (error.getField().equals("lastName")){
+                    return "useredit";
+                }
+                if (error.getField().equals("email")){
+                    return "useredit";
+                }
+                if (error.getField().equals("phoneNumber")){
+                    return "useredit";
+                }
+            }
+        }
         User user = userService.findByUsername(currentUser.getUsername());
         if (!user.getEmail().equals(userForm.getEmail())) {
             if (!userService.findByEmail(userForm.getEmail())) {
