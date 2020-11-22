@@ -40,13 +40,13 @@
 
             <tr>
                 <td>Password:</td>
-                <td><input type="text" th:field="*{password}"/></td>
+                <td><input type="password" th:field="*{password}"/></td>
                 <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" >password error</div>
             </tr>
 
             <tr>
                 <td>Confirm Password:</td>
-                <td><input type="text" th:field="*{confirmPassword}"/></td>
+                <td><input type="password" th:field="*{confirmPassword}"/></td>
                 <div th:if="${passwordError}">
                     <div style="color: red" th:text="${passwordError}"></div>
                 </div>
