@@ -13,10 +13,14 @@
     </span>
     <span sec:authorize="isAuthenticated()">
         <h1>Welcome, <span sec:authentication="name">Username</span></h1>
+        <div th:if="${accessError}">
+            <div style="color: red" th:text="${accessError}"></div>
+        </div>
         <p><a th:href="@{/logout}">Logout</a></p>
         <p><a th:href="@{/posts}">All posts</a></p>
         <p><a th:href="@{/categories}">All categories</a></p>
-        <p><a th:href="@{/userpage}">User info</a></p>
+        <p><a th:href="@{/userpage/{id}(id=${user.getId()})}">User info</a></p>
+        <p sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin_panel}">Admin panel</a></p>
     </span>
 </body>
 </html>

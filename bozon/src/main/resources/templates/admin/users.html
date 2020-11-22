@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.phoneNumber}"></td>
+        <td th:text="${user.role}"></td>
+<!--        <td>-->
+<!--            <select th:field="*{user.role}">-->
+<!--                <option value="" th:text="${user.role}">Choose role</option>-->
+<!--                <option th:each="role : ${roles}"-->
+<!--                        th:value="${role.id}"-->
+<!--                        th:utext="${role.name}"></option>-->
+<!--            </select>-->
+<!--        </td>-->
+        <td><a th:href="@{/admin_panel/update_user/{id}(id=${user.id})}">Update user info</a></td>
+    </tr>
+    </tbody>
+</table>
+<p><a th:href="@{/admin_panel}">Admin panel</a></p>
+</body>
+</html>

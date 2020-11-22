@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome</title>
+</head>
+<body>
+<span sec:authorize="isAuthenticated()">
+        <h1>Welcome, <span sec:authentication="name">Username</span></h1>
+        <p sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin_panel/get_all_users}">All users</a></p>
+    </span>
+<p><a th:href="@{/}">Home</a></p>
+</body>
+</html>
