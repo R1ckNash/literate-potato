@@ -47,16 +47,16 @@ public class User extends BaseEntity {
 
     @Column(name = "phone_number")
     @NotEmpty(message = "phone_number should not be empty")
-    @Size(min = 8, max = 10, message = "номер должен быть в диапозоне от 8 до 10")
+    @Size(min = 11, max = 12, message = "номер должен быть в диапозоне от 11 до 12")
     private String phoneNumber;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "buyer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "buyer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Sale> sales;
 }

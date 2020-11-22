@@ -6,6 +6,9 @@
 </head>
 <body>
 <table>
+    <tr th:if="${accessError}">
+        <div style="color: red" th:text="${accessError}"></div>
+    </tr>
     <tr>
         <td>Username:</td>
         <td th:text="*{userForm.getUsername()}"></td>
@@ -33,7 +36,7 @@
     </tr>
 </table>
 <p><a href="/">Home</a></p>
-<p><a href="/useredit">Edit</a></p>
+<p><a th:href="@{/useredit/{id}(id=${userForm.getId()})}">Edit</a></p>
 <p><a href="/userpost">My posts</a></p>
 </body>
 </html>
