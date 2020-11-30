@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Posts</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <div th:each="post : ${posts}">
-        <p>
-            Name : <span th:text="*{post.name}"></span>
-        </p>
-        <p>
-            Price : <span th:text="*{post.price}"></span>
-        </p>
-        <p>
+<div class="body">
+    <div class="container" th:each="post : ${posts}">
+        <div class="card-list__item">
             <a th:href="@{/post/{id}(id=${post.getId()})}">
-                <img th:src="${post.url}"
-                     width="189" height="255" alt="lorem">
+                <img class="small-img" th:src="${post.url}" alt="lorem">
             </a>
-        </p>
+            <span th:text="*{post.name}">Name(уберешь)</span>
+            <span class="card-list__price" th:text="*{post.price}">Price(уберешь)</span>
+            <span class="card-list__description" th:text="*{post.description}">(Уберешь)Very long description Very long description Very long description Very long description Very long description Very long description Very long description </span>
+        </div>
+        <a class="ml-2" href="/create_post">Create post</a>
     </div>
-    <p><a href="/">Home</a></p>
-    <p><a href="/create_post">Create post</a></p>
+</div>
 </div>
 </body>
 </html>

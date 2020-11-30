@@ -73,4 +73,24 @@ html, body {
   padding-left: 0;
 }
 
+.card-list {
+  position: relative;
+}
+.card-list__img {
+  max-height: 255px;
+  width: auto;
+}
+.card-list__item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid #e6e6e6;
+}
+.card-list__description {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 /*# sourceMappingURL=style.css.map */
