@@ -1,0 +1,38 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.header {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header__item {
+  height: 100px;
+  display: inline-block;
+  font-size: 30px;
+  color: #000000;
+  cursor: pointer;
+  position: relative;
+}
+.header__item:after {
+  position: absolute;
+  transition: all ease-in-out 0.3s;
+  content: "";
+  background: #4d4d4d;
+  display: block;
+  height: 3px;
+  width: 0;
+}
+.header__item:hover {
+  text-decoration: none;
+  color: #4d4d4d;
+}
+.header__item:hover:after {
+  height: 3px;
+  width: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */
