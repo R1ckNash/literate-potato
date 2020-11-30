@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-<div class="header">
+<div class="body">
     <div class="container">
         <div th:each="category : ${categories}">
             <a class="header__item" th:href="@{/categories/{id}(id=${category.getId()})}"

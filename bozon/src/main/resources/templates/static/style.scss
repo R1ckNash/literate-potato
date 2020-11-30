@@ -1,9 +1,12 @@
+$font-size: 30px;
+
+
 html, body {
   height: 100%;
   margin: 0;
 }
 
-.header {
+.body {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -11,7 +14,7 @@ html, body {
   &__item {
     height: 100px;
     display: inline-block;
-    font-size: 30px;
+    font-size: $font-size;
     color: #000000;
     cursor: pointer;
     position: relative;
@@ -32,5 +35,38 @@ html, body {
         width: 100%;
       }
     }
+  }
+}
+
+.btn {
+  font-size: $font-size / 1.5;
+  background: lighten(#000000, 30%);
+  color: #ffffff;
+  &:hover {
+    background: #000000;
+    color: #ffffff;
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.form-control {
+  transition: ease-in-out 0.2s;
+  border: 2px solid lighten(#000000, 90%);
+  font-size: $font-size / 1.5;
+  &:focus {
+    box-shadow: 0 0 0 0.1rem lighten(#000000, 90%);
+    outline: none;
+    border: 2px solid lighten(#000000, 90%);
+  }
+}
+
+.form-item__heading {
+  font-size: $font-size / 1.5;
+  &_description {
+    transition: none;
+    min-height: 150px;
+    resize: none;
   }
 }

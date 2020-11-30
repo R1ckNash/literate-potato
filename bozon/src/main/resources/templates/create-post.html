@@ -3,52 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Create post</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-<form th:method="POST" th:action="@{/create_post}" th:object="${postForm}">
-    <h2>New post</h2>
-    <table>
-        <tr>
-            <td>Name:</td>
-            <td><input type="text" th:field="*{name}"/></td>
-        </tr>
-
-        <tr>
-            <td>Price:</td>
-            <td><input type="text" th:field="*{price}"/></td>
-        </tr>
-
-        <tr>
-            <td>Picture url:</td>
-            <td><input type="text" th:field="*{url}"/></td>
-        </tr>
-
-        <tr>
-            <td>Description:</td>
-            <td><input type="text" th:field="*{description}"/></td>
-        </tr>
-
-        <tr>
-            <td>Select category:</td>
-            <td>
-                <select th:field="*{category}">
-                    <option value="">Choose category</option>
-                    <option th:each="category : ${categories}"
-                            th:value="${category.id}"
-                            th:utext="${category.name}"></option>
-                </select>
-            </td>
-        </tr>
-
-        <tr>
-            <td><input name="submit" type="submit" value="submit" /></td>
-            <td><a th:href="@{/}">Home</a></td>
-        </tr>
-    </table>
-    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" >name error</div>
-    <div style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}" >price error</div>
-    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}" >description error</div>
-</form>
-
+<div class="body">
+    <div class="container">
+        <h2>New post</h2>
+        <form th:method="POST" th:action="@{/create_post}" th:object="${postForm}">
+            <div class="form-group">
+                <label class="form-item__heading" for="name">Name</label>
+                <input type="text" class="form-control" th:field="*{name}" id="name" aria-describedby="emailHelp"
+                       placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <label class="form-item__heading" for="price">Price</label>
+                <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="Price" required>
+            </div>
+            <div class="form-group">
+                <label class="form-item__heading" for="picture">Picture url</label>
+                <input type="text" class="form-control" th:field="*{url}" id="picture" placeholder="url">
+            </div>
+            <div class="form-group">
+                <label class="form-item__heading" for="description">Description</label>
+                <textarea type="text" class="form-control form-item__heading_description" th:field="*{description}" id="description" placeholder="Description" required></textarea>
+            </div>
+            <label class="form-item__heading" for="select">Description</label>
+            <select class="form-control mb-4" id="select" th:field="*{category}">
+                <option>Default select</option>
+                <option th:each="category : ${categories}" th:value="${category.id}" th:utext="${category.name}"></option>
+            </select>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

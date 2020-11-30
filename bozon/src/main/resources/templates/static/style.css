@@ -3,13 +3,13 @@ html, body {
   margin: 0;
 }
 
-.header {
+.body {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.header__item {
+.body__item {
   height: 100px;
   display: inline-block;
   font-size: 30px;
@@ -17,7 +17,7 @@ html, body {
   cursor: pointer;
   position: relative;
 }
-.header__item:after {
+.body__item:after {
   position: absolute;
   transition: all ease-in-out 0.3s;
   content: "";
@@ -26,13 +26,46 @@ html, body {
   height: 3px;
   width: 0;
 }
-.header__item:hover {
+.body__item:hover {
   text-decoration: none;
   color: #4d4d4d;
 }
-.header__item:hover:after {
+.body__item:hover:after {
   height: 3px;
   width: 100%;
+}
+
+.btn {
+  font-size: 20px;
+  background: #4d4d4d;
+  color: #ffffff;
+}
+.btn:hover {
+  background: #000000;
+  color: #ffffff;
+}
+.btn:focus {
+  box-shadow: none;
+}
+
+.form-control {
+  transition: ease-in-out 0.2s;
+  border: 2px solid #e6e6e6;
+  font-size: 20px;
+}
+.form-control:focus {
+  box-shadow: 0 0 0 0.1rem #e6e6e6;
+  outline: none;
+  border: 2px solid #e6e6e6;
+}
+
+.form-item__heading {
+  font-size: 20px;
+}
+.form-item__heading_description {
+  transition: none;
+  min-height: 150px;
+  resize: none;
 }
 
 /*# sourceMappingURL=style.css.map */
