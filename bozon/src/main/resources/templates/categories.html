@@ -2,16 +2,29 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Categories</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-<div th:each="category : ${categories}">
-    <a th:href="@{/categories/{id}(id=${category.getId()})}" th:text="${category.getName()}">Category</a>
-</div>
-    <p><a th:href="@{/}">Home</a></p>
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <p><a th:href="@{/create_category}">Create new category</a></p>
+<div class="header">
+    <div class="container">
+        <div th:each="category : ${categories}">
+            <a class="header__item" th:href="@{/categories/{id}(id=${category.getId()})}"
+               th:text="${category.getName()}">Category</a>
+        </div>
+        <div>
+            <a class="header__item" th:href="@{/}">Home</a>
+        </div>
+        <div>
+            <a class="header__item" th:href="@{/}">About</a>
+        </div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a class="header__item" th:href="@{/create_category}">Create new category</a>
+        </div>
+
     </div>
+</div>
 </div>
 </body>
 </html>
