@@ -10,17 +10,17 @@
 <div class="body">
     <div class="container">
         <div th:each="category : ${categories}">
-            <a class="header__item" th:href="@{/categories/{id}(id=${category.getId()})}"
+            <a class="body__item" th:href="@{/categories/{id}(id=${category.getId()})}"
                th:text="${category.getName()}">Category</a>
         </div>
         <div>
-            <a class="header__item" th:href="@{/}">Home</a>
+            <a class="body__item" th:href="@{/}">Home</a>
         </div>
         <div>
-            <a class="header__item" th:href="@{/}">About</a>
+            <a class="body__item" th:href="@{/}">About</a>
         </div>
         <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <a class="header__item" th:href="@{/create_category}">Create new category</a>
+            <a class="body__item" th:href="@{/create_category}">Create new category</a>
         </div>
 
     </div>
