@@ -1,25 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Posts</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/style.css">
+    <link th:rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{static/style.css}"/>
 </head>
 <body>
-<div class="body">
-    <div class="container" th:each="post : ${posts}">
-        <div class="card-list__item">
-            <a th:href="@{/post/{id}(id=${post.getId()})}">
-                <img class="small-img" th:src="${post.url}" alt="lorem">
-            </a>
-            <span th:text="*{post.name}">Name(уберешь)</span>
-            <span class="card-list__price" th:text="*{post.price}">Price(уберешь)</span>
-            <span class="card-list__description" th:text="*{post.description}">(Уберешь)Very long description Very long description Very long description Very long description Very long description Very long description Very long description </span>
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+    <div class="container">
+        <div class="d-flex flex-column" sec:authorize="!isAuthenticated()">
+            <div><a class="body__item" th:href="@{/login}">Login</a></div>
+            <div><a class="body__item" th:href="@{/registration}">Registration</a></div>
         </div>
-        <a class="ml-2" href="/create_post">Create post</a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/posts}">All posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/categories}">All categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
+</nav>
+<div class="body">
+    <div class="container">
+        <div th:each="post : ${posts}">
+            <div class="card-list__item">
+                <a th:href="@{/post/{id}(id=${post.getId()})}">
+                    <img class="small-img" th:src="${post.url}" width="189" height="255" alt="lorem">
+                </a>
+                <span th:text="*{post.name}">Name</span>
+                <br>
+                <span class="card-list__price" th:text="*{post.price}">Price</span>
+                <br>
+                <span class="card-list__description" th:text="*{post.description}">Very long description</span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <p><a class="ml-2" th:href="@{/create_post}">Create post</a></p>
 </div>
 </body>
 </html>

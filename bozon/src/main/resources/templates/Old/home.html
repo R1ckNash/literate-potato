@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Welcome</title>
+    <link th:rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{static/style.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div class="body">
+    <div class="container">
+    <div class="d-flex flex-column" sec:authorize="!isAuthenticated()">
+        <div><a class="body__item" th:href="@{/login}">Login</a></div>
+        <div><a class="body__item" th:href="@{/registration}">Registration</a></div>
+    </div>
+        <div class="d-flex flex-column" sec:authorize="isAuthenticated()">
+        <h1 class="mb-5">Welcome, <span sec:authentication="name">Username</span></h1>
+        <div th:if="${accessError}">
+            <div style="color: red" th:text="${accessError}"></div>
+        </div>
+        <div><a class="body__item" th:href="@{/posts}">All posts</a></div>
+            <div><a class="body__item" th:href="@{/categories}">All categories</a></div>
+            <div><a class="body__item" th:href="@{/userpage/{id}(id=${user.getId()})}">User info</a></div>
+            <div><a class="body__item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin_panel}">Admin panel</a></div>
+            <div><a class="body__item" th:href="@{/}">About</a></div>
+            <div><a class="body__item" th:href="@{/logout}">Logout</a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

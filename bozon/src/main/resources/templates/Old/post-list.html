@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+    <link th:rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}" />
+    <link th:rel="stylesheet" th:href="@{static/style.css}"/>
+</head>
+<body>
+<div class="body">
+    <div class="container">
+        <div th:each="post : ${posts}">
+        <div class="card-list__item">
+            <a th:href="@{/post/{id}(id=${post.getId()})}">
+                <img class="small-img" th:src="${post.url}" width="189" height="255" alt="lorem">
+            </a>
+            <span th:text="*{post.name}">Name</span>
+            <span class="card-list__price" th:text="*{post.price}">Price</span>
+            <span class="card-list__description" th:text="*{post.description}">Very long description</span>
+        </div>
+    </div>
+        <p><a class="ml-2" href="/">Home</a></p>
+        <p><a class="ml-2" href="/create_post">Create post</a></p>
+</div>
+</div>
+</body>
+</html>
