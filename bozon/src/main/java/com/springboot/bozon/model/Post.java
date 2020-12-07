@@ -32,7 +32,7 @@ public class Post extends BaseEntity {
 
     @Column(name = "description")
     @NotEmpty(message = "description should not be empty")
-    @Size(min = 2, max = 15)
+    @Size(min = 1, max = 150)
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

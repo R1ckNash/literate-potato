@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments</title>
+</head>
+<body>
+
+<div th:if="${commentError}">
+    <div style="color: red" th:text="${commentError}"></div>
+</div>
+<div th:if="${userError}">
+    <div style="color: red" th:text="${userError}"></div>
+</div>
+<div th:if="${rating}">
+    <p>
+        Общий рейтинг пользователя : <span th:text="${rating}"></span>
+    </p>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Rating</th>
+            <th>Comment</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="comm : ${comments}">
+            <td th:text="*{comm.rating}"></td>
+            <td th:text="*{comm.comment}"></td>
+        </tr>
+    </tbody>
+</table>
+<div th:if="${user}">
+    <div th:if="${currentUser.id} != ${user.id}">
+        <h4>Оставьте свой комментарий:</h4>
+        <form th:method="POST" th:action="@{/comments/{id}(id=${user.id})}" th:object="${commentForm}">
+            <table>
+                <tr>
+                    <td>Rating</td>
+                    <td>
+                        <select th:field="*{rating}">
+                            <option th:value="1">1</option>
+                            <option th:value="2">2</option>
+                            <option th:value="3">3</option>
+                            <option th:value="4">4</option>
+                            <option th:value="5">5</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Comment:</td>
+                    <td><input type="text" th:field="*{comment}"/></td>
+                </tr>
+                <tr>
+                    <td><input name="submit" type="submit" value="submit" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<div style="color:red" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" >rating error</div>
+<td><a th:href="@{/}">Home</a></td>
+</body>
+</html>

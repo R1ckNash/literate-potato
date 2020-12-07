@@ -1,5 +1,6 @@
 package com.springboot.bozon.service.impl;
 
+import com.springboot.bozon.model.Comment;
 import com.springboot.bozon.model.Status;
 import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.RoleRepository;
@@ -93,6 +94,7 @@ public class UserServiceImpl implements UserService {
             userFromDB.setRole(user.getRole());
         }
         userRepository.save(userFromDB);
+
         return true;
     }
 
@@ -101,5 +103,15 @@ public class UserServiceImpl implements UserService {
         return new BCryptPasswordEncoder();
     }
 
+    @Override
+    public int getAVGRating(Long id) {
+        User userFromDB = userRepository.getOne(id);
+        List<Comment> comments = List.copyOf(userFromDB.getRating());
+        int rating = 0;
+        for(Comment comment : comments){
+            rating += comment.getRating();
+        }
+        return rating / comments.size();
+    }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * @author ricknash
+ * @author mialyshev
  */
 @Controller
 public class HomePageController {

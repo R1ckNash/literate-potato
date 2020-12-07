@@ -24,6 +24,10 @@
     <p th:if="${currentUser.id} == ${postForm.seller.id}">
         <a th:href="@{/closepost/{id}(id=${postForm.getId()})}">Close post</a>
     </p>
+    <p>
+        Продавец : <span th:text="*{postForm.seller.username}"></span>
+        <a th:href="@{/comments/{id}(id=${postForm.seller.id})}">Просмотреть отзывы</a>
+    </p>
 <p><a href="/">Home</a></p>
 </body>
 </html>
