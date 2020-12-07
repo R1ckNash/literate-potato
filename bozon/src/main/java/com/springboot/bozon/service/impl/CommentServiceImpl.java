@@ -18,12 +18,10 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
 
     @Autowired
     public CommentServiceImpl(CommentRepository commentRepository, UserRepository userRepository) {
         this.commentRepository = commentRepository;
-        this.userRepository = userRepository;
     }
 
     @Override
@@ -54,14 +52,4 @@ public class CommentServiceImpl implements CommentService {
         return false;
     }
 
-    @Override
-    public double getAVGRating(Long id) {
-        User userFromDB = userRepository.getOne(id);
-        List<Comment> comments = List.copyOf(userFromDB.getRating());
-        double rating = 0;
-        for(Comment comment : comments){
-            rating += comment.getRating();
-        }
-        return rating / comments.size();
-    }
 }

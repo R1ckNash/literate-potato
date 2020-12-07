@@ -12,6 +12,11 @@
 <div th:if="${userError}">
     <div style="color: red" th:text="${userError}"></div>
 </div>
+<div th:if="${rating}">
+    <p>
+        Общий рейтинг пользователя : <span th:text="${rating}"></span>
+    </p>
+</div>
 <table>
     <thead>
         <tr>

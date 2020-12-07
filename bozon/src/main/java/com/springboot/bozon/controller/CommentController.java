@@ -42,10 +42,12 @@ public class CommentController {
             model.addAttribute("userError", "Пользователь с id: " + id + " не найден");
             return "comments";
         }
+        int rating = userService.getAVGRating(id);
         List<Comment> comments = List.copyOf(userFromDB.getRating());
         model.addAttribute("user", userFromDB);
         model.addAttribute("currentUser", userByUsername);
         model.addAttribute("comments", comments);
+        model.addAttribute("rating", rating);
         model.addAttribute("commentForm", new Comment());
         return "comments";
     }

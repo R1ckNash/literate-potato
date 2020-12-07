@@ -27,4 +27,5 @@ public interface UserService {
 
     boolean updateUserInfo(User user, Long userId);
 
+    int getAVGRating(Long id);
 }

@@ -17,6 +17,4 @@ public interface CommentService {
     boolean save(User evaluator_user, User rated_user, Comment comment);
 
     boolean deleteById(Long id);
-
-    double getAVGRating(Long id);
 }
