@@ -48,7 +48,6 @@ public class UserController {
             model.addAttribute("user", userByUsername);
             return "home";
         }
-
         model.addAttribute("userForm", userById);
         return "userpage";
     }

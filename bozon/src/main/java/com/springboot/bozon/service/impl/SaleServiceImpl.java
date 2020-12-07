@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author ricknash
+ * @author mialyshev
  */
 @Service
 public class SaleServiceImpl implements SaleService {

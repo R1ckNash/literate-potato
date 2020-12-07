@@ -93,6 +93,7 @@ public class UserServiceImpl implements UserService {
             userFromDB.setRole(user.getRole());
         }
         userRepository.save(userFromDB);
+
         return true;
     }
 

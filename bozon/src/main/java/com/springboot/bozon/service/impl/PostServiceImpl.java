@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ricknash
+ * @author mialyshev
  */
 @Service
 public class PostServiceImpl implements PostService {

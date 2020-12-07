@@ -34,6 +34,10 @@
         <td>Phone Number:</td>
         <td th:text="*{userForm.getPhoneNumber()}"></td>
     </tr>
+
+    <tr>
+        <p><a th:href="@{/comments/{id}(id=${userForm.getId()})}">Отзывы о вас</a></p>
+    </tr>
 </table>
 <p><a href="/">Home</a></p>
 <p><a th:href="@{/useredit/{id}(id=${userForm.getId()})}">Edit</a></p>

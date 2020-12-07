@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -47,7 +48,7 @@ public class User extends BaseEntity {
 
     @Column(name = "phone_number")
     @NotEmpty(message = "phone_number should not be empty")
-    @Size(min = 11, max = 12, message = "номер должен быть в диапозоне от 11 до 12")
+    @Size(min = 11, max = 12, message = "номер должен быть в диапазоне от 11 до 12")
     private String phoneNumber;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -59,4 +60,10 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "buyer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Sale> sales;
+
+    @OneToMany(mappedBy = "evaluator_user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Comment> comments;
+
+    @OneToMany(mappedBy = "rated_user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Comment> rating;
 }
