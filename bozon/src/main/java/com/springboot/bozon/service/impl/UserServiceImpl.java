@@ -6,39 +6,33 @@ import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.RoleRepository;
 import com.springboot.bozon.repository.UserRepository;
 import com.springboot.bozon.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author mialyshev
  */
 
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-
-    }
-
     @Override
+    @Transactional
     public boolean save(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
+        Optional<User> userFromDB = userRepository.findByUsername(user.getUsername());
 
-        if (userFromDB != null) {
+        if (userFromDB.isPresent()) {
             return false;
         }
 
@@ -51,7 +45,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository
+                .findByUsername(username)
+                .orElse(null);
     }
 
     @Override
@@ -74,44 +70,39 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean findByEmail(String email) {
-        return userRepository.findByEmail(email) == null;
+    public boolean isPresentByEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 
     @Override
-    public boolean findByPhoneNumber(String phoneNumber) {
-        return userRepository.findByPhoneNumber(phoneNumber) == null;
+    public boolean isPresentByPhoneNumber(String phoneNumber) {
+        return userRepository.findByPhoneNumber(phoneNumber).isPresent();
     }
 
     @Override
-    public boolean updateUserInfo(User user, Long userId) {
+    @Transactional
+    public void updateUserInfo(User user, Long userId) {
         User userFromDB = findById(userId);
+        // FIXME: а если null? мб на Optional переписать?
         userFromDB.setFirstName(user.getFirstName());
         userFromDB.setLastName(user.getLastName());
         userFromDB.setEmail(user.getEmail());
         userFromDB.setPhoneNumber(user.getPhoneNumber());
-        if (user.getRole() != null){
+        if (user.getRole() != null) {
             userFromDB.setRole(user.getRole());
         }
-        userRepository.save(userFromDB);
-
-        return true;
-    }
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     @Override
     public int getAVGRating(Long id) {
         User userFromDB = userRepository.getOne(id);
+        // FIXME: зачем копия?
         List<Comment> comments = List.copyOf(userFromDB.getRating());
-        int rating = 0;
-        for(Comment comment : comments){
-            rating += comment.getRating();
-        }
-        return rating / comments.size();
+        return  (int) comments
+                .stream()
+                .mapToInt(Comment::getRating)
+                .average()
+                .orElse(0);
     }
 
 }

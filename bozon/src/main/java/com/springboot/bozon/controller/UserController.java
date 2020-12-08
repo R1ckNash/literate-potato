@@ -110,14 +110,14 @@ public class UserController {
 
 
         if (!userById.getEmail().equals(userForm.getEmail())) {
-            if (!userService.findByEmail(userForm.getEmail())) {
+            if (userService.isPresentByEmail(userForm.getEmail())) {
                 model.addAttribute("emailError", "Пользователь с таким email уже существует");
                 return "useredit";
             }
         }
 
         if (!userById.getPhoneNumber().equals(userForm.getPhoneNumber())) {
-            if (!userService.findByPhoneNumber(userForm.getPhoneNumber())) {
+            if (userService.isPresentByPhoneNumber(userForm.getPhoneNumber())) {
                 model.addAttribute("phoneError", "Пользователь с таким номером телефона уже существует");
                 return "useredit";
             }

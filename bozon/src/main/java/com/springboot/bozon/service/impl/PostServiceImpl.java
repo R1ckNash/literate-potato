@@ -6,26 +6,24 @@ import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.PostRepository;
 import com.springboot.bozon.repository.UserRepository;
 import com.springboot.bozon.service.PostService;
+import lombok.RequiredArgsConstructor;
+import one.util.streamex.StreamEx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author mialyshev
  */
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-
-    @Autowired
-    public PostServiceImpl(PostRepository postRepository, UserRepository userRepository) {
-        this.postRepository = postRepository;
-        this.userRepository = userRepository;
-    }
 
     public Post findById(Long id) {
         return postRepository.getOne(id);
@@ -37,20 +35,21 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findAllActive() {
-        ArrayList<Post>postArrayList = new ArrayList<>();
-        List<Post>posts = findAll();
-        for(Post post : posts){
-            if (post.getStatus() == Status.ACTIVE){
-                postArrayList.add(post);
-            }
-        }
-        return postArrayList;
+        List<Post> posts = findAll();
+        return StreamEx.of(posts)
+                .filter(post -> post.getStatus() == Status.ACTIVE)
+                .toList();
     }
 
     public boolean save(Post post, String username) {
-        User user = userRepository.findByUsername(username);
-        post.setSeller(user);
-        post.setStatus(Status.ACTIVE);
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            post.setSeller(user.get());
+            post.setStatus(Status.ACTIVE);
+        } else {
+            // TODO: определить поведение, если пользователь не найден
+            throw new RuntimeException("fatal error???");
+        }
         postRepository.save(post);
         return true;
     }
@@ -65,34 +64,24 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findByCategory(long categoryId) {
-        ArrayList<Post>postArrayList = new ArrayList<>();
-
         List<Post> posts = findAllActive();
-
-        for(Post post : posts){
-            if (post.getCategory().getId() == categoryId){
-                postArrayList.add(post);
-            }
-        }
-        return postArrayList;
+        return StreamEx.of(posts)
+                .filter(post -> post.getCategory().getId() == categoryId)
+                .toList();
     }
 
     @Override
+    @Transactional
     public void setStatus(Long postId, Status status) {
         Post post = findById(postId);
         post.setStatus(status);
-        postRepository.save(post);
     }
 
     @Override
     public List<Post> findByUser(Long userId) {
-        List<Post>posts = findAllActive();
-        ArrayList<Post> userPosts = new ArrayList<>();
-        for(Post post : posts){
-            if(post.getSeller().getId() == userId){
-                userPosts.add(post);
-            }
-        }
-        return userPosts;
+        List<Post> posts = findAllActive();
+        return StreamEx.of(posts)
+                .filter(post -> post.getSeller().getId().equals(userId))
+                .toList();
     }
 }

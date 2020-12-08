@@ -14,7 +14,7 @@ public interface SaleService {
 
     List<Sale> findAll();
 
-    boolean save(Post post, User user);
+    void save(Post post, User user);
 
     boolean deleteById(Long id);
 

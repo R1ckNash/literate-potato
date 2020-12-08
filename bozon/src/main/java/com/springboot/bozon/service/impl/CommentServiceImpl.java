@@ -4,8 +4,8 @@ import com.springboot.bozon.model.Comment;
 import com.springboot.bozon.model.Status;
 import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.CommentRepository;
-import com.springboot.bozon.repository.UserRepository;
 import com.springboot.bozon.service.CommentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +15,10 @@ import java.util.List;
  * @author mialyshev
  */
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
-
-    @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository, UserRepository userRepository) {
-        this.commentRepository = commentRepository;
-    }
 
     @Override
     public Comment findById(Long id) {
