@@ -4,24 +4,23 @@ import com.springboot.bozon.model.Category;
 import com.springboot.bozon.model.Status;
 import com.springboot.bozon.repository.CategoryRepository;
 import com.springboot.bozon.service.CategoryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author mialyshev
  */
 
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-
-    @Autowired
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
 
     public Category findById(Long id) {
         return categoryRepository.getOne(id);
@@ -31,12 +30,14 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findAll();
     }
 
+    @Transactional
     public boolean save(Category category) {
-        Category categoryFromDB = categoryRepository.findByName(category.getName());
+        Optional<Category> categoryFromDb = categoryRepository.findByName(category.getName());
 
-        if (categoryFromDB != null) {
+        if (categoryFromDb.isPresent()) {
             return false;
         }
+
         category.setStatus(Status.ACTIVE);
         categoryRepository.save(category);
         return true;

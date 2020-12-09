@@ -1,8 +1,8 @@
 package com.springboot.bozon.service.impl;
 
-import com.springboot.bozon.model.User;
 import com.springboot.bozon.repository.UserRepository;
 import com.springboot.bozon.service.details.MyUserDetails;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,21 +14,17 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("Could not find user");
-        }
-
-        return new MyUserDetails(user);
+        return userRepository.findByUsername(username)
+                .map(MyUserDetails::new)
+                .orElseThrow(() -> new UsernameNotFoundException("Could not find user"));
     }
 
 }

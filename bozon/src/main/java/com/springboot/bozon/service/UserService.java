@@ -21,11 +21,11 @@ public interface UserService {
 
     boolean delete(Long id);
 
-    boolean findByEmail(String email);
+    boolean isPresentByEmail(String email);
 
-    boolean findByPhoneNumber(String phoneNumber);
+    boolean isPresentByPhoneNumber(String phoneNumber);
 
-    boolean updateUserInfo(User user, Long userId);
+    void updateUserInfo(User user, Long userId);
 
     int getAVGRating(Long id);
 }
