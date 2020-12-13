@@ -31,12 +31,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public boolean save(User evaluator_user, User rated_user, Comment comment) {
+    public void save(User evaluator_user, User rated_user, Comment comment) {
         comment.setEvaluator_user(evaluator_user);
         comment.setRated_user(rated_user);
         comment.setStatus(Status.ACTIVE);
         commentRepository.save(comment);
-        return true;
     }
 
     @Override

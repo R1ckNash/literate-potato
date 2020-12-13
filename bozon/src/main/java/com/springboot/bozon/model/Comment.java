@@ -1,6 +1,11 @@
 package com.springboot.bozon.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
@@ -13,8 +18,20 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "comments")
-@Data
-public class Comment extends BaseEntity{
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+public class Comment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 
     @Column(name = "comment")
     private String comment;
@@ -34,26 +51,4 @@ public class Comment extends BaseEntity{
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "evaluator_user_id")
     private User evaluator_user;
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-        Comment comment = (Comment)obj;
-
-        return comment.rating == this.rating && comment.comment.equals(this.comment);
-    }
-
-    @Override
-    public int hashCode() {
-        final int PRIME = 31;
-        int result = 1;
-        result = PRIME * result + Math.toIntExact(super.getId());
-        return result;
-    }
-
 }

@@ -14,7 +14,7 @@ public interface CommentService {
 
     List<Comment> findAll();
 
-    boolean save(User evaluator_user, User rated_user, Comment comment);
+    void save(User evaluator_user, User rated_user, Comment comment);
 
     boolean deleteById(Long id);
 }

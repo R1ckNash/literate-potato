@@ -2,6 +2,7 @@ package com.springboot.bozon.service.details;
 
 import com.springboot.bozon.model.Role;
 import com.springboot.bozon.model.User;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +15,7 @@ import java.util.List;
  * @author mialyshev
  */
 
-
+@EqualsAndHashCode
 public class MyUserDetails implements UserDetails {
 
     private final User user;

@@ -41,6 +41,7 @@ public class PostServiceImpl implements PostService {
                 .toList();
     }
 
+    @Override
     public boolean save(Post post, String username) {
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isPresent()) {
@@ -54,6 +55,7 @@ public class PostServiceImpl implements PostService {
         return true;
     }
 
+    @Override
     public boolean deleteById(Long id) {
         if (postRepository.findById(id).isPresent()) {
             postRepository.deleteById(id);
@@ -66,7 +68,7 @@ public class PostServiceImpl implements PostService {
     public List<Post> findByCategory(long categoryId) {
         List<Post> posts = findAllActive();
         return StreamEx.of(posts)
-                .filter(post -> post.getCategory().getId() == categoryId)
+                .filter(post -> post.getCategory().getId().equals(categoryId))
                 .toList();
     }
 
